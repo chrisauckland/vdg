@@ -1,62 +1,39 @@
-input.onButtonPressed(Button.A, function () {
-    if (level == 0) {
-        level = 1
-        basic.showNumber(level)
+function checkWin (stage: number) {
+    if (level == stage) {
+        level = level + 1
+        if (level == 6) {
+            music.play(music.stringPlayable("E F D A F C5 B C5 ", 120), music.PlaybackMode.UntilDone)
+        } else {
+            basic.showNumber(level)
+        }
     } else {
         reset()
     }
+}
+input.onButtonPressed(Button.A, function () {
+    checkWin(0)
 })
 input.onGesture(Gesture.ScreenDown, function () {
-    if (level == 5) {
-        level = 6
-        music.play(music.stringPlayable("E F D A F C5 B C5 ", 120), music.PlaybackMode.UntilDone)
-    } else {
-        reset()
-    }
+    checkWin(5)
 })
 input.onSound(DetectedSound.Loud, function () {
-    if (level == 4) {
-        level = 5
-        basic.showNumber(level)
-    } else {
-        reset()
-    }
+    checkWin(4)
 })
 input.onButtonPressed(Button.AB, function () {
-    if (level == 1) {
-        level = 2
-        basic.showNumber(level)
-    } else {
-        reset()
-    }
+    checkWin(1)
 })
 input.onButtonPressed(Button.B, function () {
-    if (level == 0) {
-        level = 1
-        basic.showNumber(level)
-    } else {
-        reset()
-    }
+    checkWin(0)
 })
 input.onGesture(Gesture.Shake, function () {
-    if (level == 2) {
-        level = 3
-        basic.showNumber(level)
-    } else {
-        reset()
-    }
+    checkWin(2)
 })
 input.onGesture(Gesture.LogoDown, function () {
-    if (level == 3) {
-        level = 4
-        basic.showNumber(level)
-    } else {
-        reset()
-    }
+    checkWin(3)
 })
 function reset () {
     if (level != 6) {
-        level = 0
+        level = level - 1
         basic.showNumber(level)
     }
 }
